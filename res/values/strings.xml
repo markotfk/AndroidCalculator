@@ -18,5 +18,6 @@
     <string name="equals">=</string>
     <string name="dot">.</string>
     <string name="zero_output">0</string>
+    <string name="clear">C</string>
 
 </resources>

@@ -2,72 +2,72 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:padding="10dp"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:padding="10dp" >
 
-	<TextView
-	    android:id="@+id/output"
-	    android:layout_width="fill_parent"
-	    android:layout_height="40dp"
-	    android:gravity="right" 
-	    android:text="@string/zero_output" />
+    <TextView
+        android:id="@+id/output"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:gravity="right"
+        android:text="@string/zero_output" />
 
-	<Button
-	    android:id="@+id/but_plus"
-	    android:layout_width="70dp"
-	    android:layout_height="wrap_content"
-	    android:layout_alignParentRight="true"
-	    android:layout_below="@id/output"
-	    android:text="@string/plus" />
+    <Button
+        android:id="@+id/but_plus"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/output"
+        android:text="@string/plus" />
 
-	<Button
-	    android:id="@+id/but_minus"
-	    android:layout_width="70dp"
-	    android:layout_height="wrap_content"
-	    android:layout_alignParentRight="true"
-	    android:layout_below="@id/but_plus"
-	    android:text="@string/minus" />
+    <Button
+        android:id="@+id/but_minus"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/but_plus"
+        android:text="@string/minus" />
 
-	<Button
-	    android:id="@+id/but_mul"
-	    android:layout_width="70dp"
-	    android:layout_height="wrap_content"
-	    android:layout_alignParentRight="true"
-	    android:layout_below="@id/but_minus"
-	    android:text="@string/mul" />
+    <Button
+        android:id="@+id/but_mul"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/but_minus"
+        android:text="@string/mul" />
 
-	<Button
-	    android:id="@+id/but_div"
-	    android:layout_width="70dp"
-	    android:layout_height="wrap_content"
-	    android:layout_alignParentRight="true"
-	    android:layout_below="@id/but_mul"
-	    android:text="@string/div" />
+    <Button
+        android:id="@+id/but_div"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/but_mul"
+        android:text="@string/div" />
 
-	<Button
-	    android:id="@+id/but_nine"
-	    android:layout_width="70dp"
-	    android:layout_height="wrap_content"
-	    android:layout_below="@id/output"
-	    android:layout_toLeftOf="@id/but_plus"
-	    android:text="@string/nine" />
+    <Button
+        android:id="@+id/but_nine"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/output"
+        android:layout_toLeftOf="@id/but_plus"
+        android:text="@string/nine" />
 
-	<Button
-	    android:id="@+id/but_eight"
-	    android:layout_width="70dp"
-	    android:layout_height="wrap_content"
-	    android:layout_below="@id/output"
-	    android:layout_toLeftOf="@id/but_nine"
-	    android:text="@string/eight" />
+    <Button
+        android:id="@+id/but_eight"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/output"
+        android:layout_toLeftOf="@id/but_nine"
+        android:text="@string/eight" />
 
-	<Button
-	    android:id="@+id/but_seven"
-	    android:layout_width="70dp"
-	    android:layout_height="wrap_content"
-	    android:layout_below="@id/output"
-	    android:layout_toLeftOf="@id/but_eight"
-	    android:text="@string/seven" />
-    
+    <Button
+        android:id="@+id/but_seven"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/output"
+        android:layout_toLeftOf="@id/but_eight"
+        android:text="@string/seven" />
+
     <Button
         android:id="@+id/but_six"
         android:layout_width="70dp"
@@ -91,7 +91,7 @@
         android:layout_below="@id/but_seven"
         android:layout_toLeftOf="@id/but_five"
         android:text="@string/four" />
-    
+
     <Button
         android:id="@+id/but_three"
         android:layout_width="70dp"
@@ -115,29 +115,37 @@
         android:layout_below="@id/but_four"
         android:layout_toLeftOf="@id/but_two"
         android:text="@string/one" />
-        
-    <Button
-        android:id="@+id/but_zero"
-        android:layout_width="70dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/but_three"
-        android:layout_toLeftOf="@id/but_div"
-        android:text="@string/zero" />
 
     <Button
         android:id="@+id/but_dot"
         android:layout_width="70dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/but_two"
-        android:layout_toLeftOf="@id/but_zero"
+        android:layout_below="@+id/but_two"
+        android:layout_toLeftOf="@+id/but_two"
         android:text="@string/dot" />
 
-	<Button
-	    android:id="@+id/but_equals"
-	    android:layout_width="70dp"
-	    android:layout_height="wrap_content"
-	    android:layout_below="@id/but_one"
-	    android:layout_toLeftOf="@id/but_dot"
-	    android:text="@string/equals" />
-	        
+    <Button
+        android:id="@+id/but_zero"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/but_three"
+        android:layout_toLeftOf="@+id/but_three"
+        android:text="@string/zero" />
+
+    <Button
+        android:id="@+id/but_clear"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/but_three"
+        android:layout_toRightOf="@+id/but_two"
+        android:text="@string/clear" />
+
+    <Button
+        android:id="@+id/but_equals"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/but_div"
+        android:layout_below="@+id/but_div"
+        android:text="@string/equals" />
+
 </RelativeLayout>

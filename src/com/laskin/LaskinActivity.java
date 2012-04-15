@@ -10,7 +10,7 @@ import android.widget.*;
 
 public class LaskinActivity extends Activity implements OnClickListener {
 	
-	Laskin laskin;
+	Laskin calculator;
 	private TextView output;
 	private final static int CLEAR_OUTPUT = 1 << 0;
 	private final static int BLOCK_DOT = 1 << 1;
@@ -24,7 +24,7 @@ public class LaskinActivity extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		output = (TextView)findViewById(R.id.output);
-		laskin = new Laskin();
+		calculator = new Laskin();
 		addButtonListeners();
 	}
 	
@@ -61,6 +61,8 @@ public class LaskinActivity extends Activity implements OnClickListener {
 		b.setOnClickListener(this);
 		b = (Button)findViewById(R.id.but_minus);
 		b.setOnClickListener(this);
+		b = (Button)findViewById(R.id.but_clear);
+		b.setOnClickListener(this);
 	}
 	
 	public void onClick(View v) {
@@ -77,9 +79,9 @@ public class LaskinActivity extends Activity implements OnClickListener {
 			case R.id.but_equals: {
 				String num = output.getText().toString();
 				if (num.length() > 0) {
-					laskin.addNumber(output.getText().toString());
+					calculator.addNumber(output.getText().toString());
 				}
-				String result = String.valueOf(laskin.getResult());
+				String result = String.valueOf(calculator.getResult());
 				if (result.endsWith(".0")) {
 					result = result.substring(0, result.length()-2);
 				}
@@ -88,6 +90,13 @@ public class LaskinActivity extends Activity implements OnClickListener {
 				flags = flags & ~BLOCK_DOT;
 				
 				numberAdded = false;
+				break;
+			}
+			case R.id.but_clear: {
+				calculator.reset();
+				flags = flags | CLEAR_OUTPUT;
+				flags = flags & ~BLOCK_DOT;
+				output.setText(R.string.zero_output);
 				break;
 			}
 			case R.id.but_dot: {
@@ -114,11 +123,11 @@ public class LaskinActivity extends Activity implements OnClickListener {
 		final String num = output.getText().toString();
 		if (num.length() > 0) {
 			if (!numberAdded) {
-				laskin.addNumber(num);
+				calculator.addNumber(num);
 				numberAdded = true;
 			}
 		}
-		laskin.addNumber(buttonStr);
+		calculator.addNumber(buttonStr);
 		flags = flags | CLEAR_OUTPUT;
 		flags = flags & ~BLOCK_DOT;
 	}

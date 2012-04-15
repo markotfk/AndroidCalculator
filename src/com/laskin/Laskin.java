@@ -1,6 +1,5 @@
 package com.laskin;
-import java.util.List;
-import java.util.ArrayList;
+import java.util.*;
 
 public class Laskin {
 
@@ -14,9 +13,11 @@ public class Laskin {
 	
 	private optype opType = optype.op_unknown;
 	private List<String> numbers;
+	private List<String> postfix;
 	
 	public Laskin() {
 		numbers = new ArrayList<String>();
+		postfix = new ArrayList<String>();
 	}
 	
 	public boolean isOpType(String value) {
@@ -58,57 +59,94 @@ public class Laskin {
 	}
 	
 	public double getResult() {
-		
-		double result = 0;
-		double lastNum = 0;
-		optype prevOp = optype.op_unknown;
-		try {
-			for (String next : numbers) {
-				prevOp = opType;
-				if (!isOpType(next)) {
-					if (lastNum != 0) {
-						opType = prevOp;
-						result = calculate(lastNum, Double.parseDouble(next));
-						lastNum = result;
-					} else {
-						lastNum = Double.parseDouble(next);
-					}
-					
-				} 
-			}
-		} catch (NumberFormatException e) {
-			e.printStackTrace();
-			result = 0;
-		}
-		numbers.clear();
-		opType = optype.op_unknown;
+		convertToPostfix();
+		final double result = evaluatePostfix();
+		reset();
 		return result;
 	}
 	
-	/**
-	 * Calculate two numbers based on current operation type
-	 * @param num1 First number
-	 * @param num2 Second number
-	 * @return Calculation result
-	 */
-	private double calculate(double num1, double num2) {
-		double result = 0;
-		switch (opType) {
-			case op_mul:
-				result = num1 * num2;
-				break;
-			case op_div:
-				result = num1 / num2;
-				break;
-			case op_plus:
-				result = num1 + num2;
-				break;
-			case op_minus:
-				result = num1 - num2;
-				break;
-			default:
-				break;
-		}
-		return result;
+	public void reset() {
+		numbers.clear();
+		postfix.clear();
+		opType = optype.op_unknown;
 	}
+	
+	private int precedence(String op) {
+	   if (op.equalsIgnoreCase("*") || op.equalsIgnoreCase("/")) {
+		   return 1;
+	   }
+	   if (op.equalsIgnoreCase("+") || op.equalsIgnoreCase("-")) {
+		   return 0;
+	   }
+	   return -1;
+	}
+
+	private void convertToPostfix() {
+		Stack<String> opStack = new Stack<String>();
+
+	    for (String num : numbers) {
+	    	if (isOpType(num)) {
+	    		while ( (!opStack.isEmpty()) 
+	    				&& (!opStack.peek().equals('('))
+	    				&& (precedence(num) <= precedence((String)opStack.peek()))){
+	    			postfix.add(opStack.pop());
+	    		}
+	    		opStack.push(num);
+	    	}
+	    	else if (num.equalsIgnoreCase("(")) {
+	    		opStack.push(num);
+	    	}
+	    	else if (num.equalsIgnoreCase(")") ) {
+	    		while (!(opStack.peek()).equals('(')){
+	    			postfix.add(opStack.pop());
+	    		}
+	    		opStack.pop();
+	    	}
+	    	else {
+	    		postfix.add(num);
+	    	}
+	    }
+	    while (!opStack.isEmpty()) {
+	    	postfix.add(opStack.pop()); 
+	    }
+	  }
+
+	public double evaluatePostfix() { 
+	    Stack<Double> resultStack = new Stack<Double>();
+	    double num1, num2;
+	    double result = 0;
+	    for (String ch : postfix) {
+			 if (ch.equalsIgnoreCase("+")) {
+				 num2 = resultStack.pop().doubleValue();
+			     num1 = resultStack.pop().doubleValue();
+			     result = num1 + num2;
+			     resultStack.push(new Double(result));
+			 }
+			 else if (ch.equalsIgnoreCase("-")) {
+				 num2 = resultStack.pop().doubleValue();
+			     num1 = resultStack.pop().doubleValue();
+			     result = num1 - num2;
+			     resultStack.push(new Double(result));
+			 }
+			 else if (ch.equalsIgnoreCase("*")) {
+				 num2 = resultStack.pop().doubleValue();
+			     num1 = resultStack.pop().doubleValue();
+			     result = num1 * num2;
+			     resultStack.push(new Double(result));
+			 }
+			 else if (ch.equalsIgnoreCase("/")) {
+				 num2 = resultStack.pop().doubleValue();
+			     num1 = resultStack.pop().doubleValue();
+			     result = num1 / num2;
+			     resultStack.push(new Double(result));
+			 }
+			 else {
+				 resultStack.push(Double.valueOf(ch));
+			 }
+	    }
+	    if (resultStack.size() > 0) {
+	    	result = resultStack.pop().doubleValue();
+	    }
+	    return result;
+	  }
 }
