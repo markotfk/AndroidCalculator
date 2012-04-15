@@ -132,35 +132,41 @@ public class Laskin {
 	    Stack<Double> resultStack = new Stack<Double>();
 	    double num1, num2;
 	    double result = 0;
-	    for (String ch : postfix) {
-			 if (ch.equalsIgnoreCase("+")) {
-				 num2 = resultStack.pop().doubleValue();
-			     num1 = resultStack.pop().doubleValue();
-			     result = num1 + num2;
-			     resultStack.push(new Double(result));
-			 }
-			 else if (ch.equalsIgnoreCase("-")) {
-				 num2 = resultStack.pop().doubleValue();
-			     num1 = resultStack.pop().doubleValue();
-			     result = num1 - num2;
-			     resultStack.push(new Double(result));
-			 }
-			 else if (ch.equalsIgnoreCase("*")) {
-				 num2 = resultStack.pop().doubleValue();
-			     num1 = resultStack.pop().doubleValue();
-			     result = num1 * num2;
-			     resultStack.push(new Double(result));
-			 }
-			 else if (ch.equalsIgnoreCase("/")) {
-				 num2 = resultStack.pop().doubleValue();
-			     num1 = resultStack.pop().doubleValue();
-			     result = num1 / num2;
-			     resultStack.push(new Double(result));
-			 }
-			 else {
-				 resultStack.push(Double.valueOf(ch));
-			 }
+	    try {
+	    	for (String ch : postfix) {
+				 if (ch.equalsIgnoreCase("+")) {
+					 num2 = resultStack.pop().doubleValue();
+				     num1 = resultStack.pop().doubleValue();
+				     result = num1 + num2;
+				     resultStack.push(new Double(result));
+				 }
+				 else if (ch.equalsIgnoreCase("-")) {
+					 num2 = resultStack.pop().doubleValue();
+				     num1 = resultStack.pop().doubleValue();
+				     result = num1 - num2;
+				     resultStack.push(new Double(result));
+				 }
+				 else if (ch.equalsIgnoreCase("*")) {
+					 num2 = resultStack.pop().doubleValue();
+				     num1 = resultStack.pop().doubleValue();
+				     result = num1 * num2;
+				     resultStack.push(new Double(result));
+				 }
+				 else if (ch.equalsIgnoreCase("/")) {
+					 num2 = resultStack.pop().doubleValue();
+				     num1 = resultStack.pop().doubleValue();
+				     result = num1 / num2;
+				     resultStack.push(new Double(result));
+				 }
+				 else {
+					 resultStack.push(Double.valueOf(ch));
+				 }
+		    }
+	    } catch (Exception e) {
+	    	e.printStackTrace();
+	    	result = 0;
 	    }
+	    
 	    if (resultStack.size() > 0) {
 	    	result = resultStack.pop().doubleValue();
 	    }
